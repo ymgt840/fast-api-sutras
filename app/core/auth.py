@@ -9,7 +9,7 @@ from passlib.context import CryptContext
 from pydantic import ValidationError
 from sqlalchemy.ext.asyncio import AsyncSession
 # app
-from app import crud_v2, models, schemas
+from app import crud, models, schemas
 from app.exceptions.core import APIException
 from app.exceptions.error_message import ErrorMessage
 # config系
@@ -61,7 +61,7 @@ async def get_current_user(
         ) from None
 
     # ユーザーを取得する
-    user = await crud_v2.user.get_db_obj_by_id(db, id=token_data.sub)
+    user = await crud.user.get_db_obj_by_id(db, id=token_data.sub)
     if not user:
         raise APIException(ErrorMessage.NOT_FOUND("USER"))
     user_scope = user.scopes.split(",") if user.scopes else []
