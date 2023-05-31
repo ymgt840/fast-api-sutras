@@ -12,6 +12,6 @@ class Todo(ModelBaseMixin, Base):
     description: Mapped[str]       = mapped_column(Text)
     completed_at: Mapped[datetime] = mapped_column(DateTime)
 
-    tag: Mapped[list] = relationship(
+    tags: Mapped[list] = relationship(
         "Tag", secondary="todos_tags", back_populates="todos", lazy="joined",
     )
