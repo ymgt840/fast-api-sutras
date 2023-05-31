@@ -47,6 +47,7 @@ class CRUDTodo(
         return data
 
     def add_tags_to_todo(self, db:Session, todo: models.Todo, tags_in: list[schemas.TagCreate]) -> models.Todo:
+        """TODOが単独がある場合に、Tagsとのリレーションを作成する"""
         # Tags を upsert してデータを受け取り、整形してlist[dict]に格納する
         # TodoTag insert value を作成する
         tags   = crud.tag.upsert_tags(db, tag_in=tags_in)
