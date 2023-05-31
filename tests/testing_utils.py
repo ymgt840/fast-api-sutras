@@ -4,13 +4,13 @@ def assert_dict_part(
     result_dict: dict[Any, Any],
     expected_dict: dict[Any, Any],
     exclude_fields: list[str] = [],
-    is_deleted: bool = False,
+    expected_delete: bool = False,
 ) -> None:
     """
     dict のアサーションを実行する
     result_dict と expected_dict の整合性を担保する
     """
-    if is_deleted: # 削除済データを取得する場合は、deleted_atにデータが存在することのみをチェックする
+    if expected_delete:
         assert result_dict.get("deleted_at") or result_dict.get("deletedAt")
         exclude_fields.extend(["deleted_at", "deletedAt"])
 
