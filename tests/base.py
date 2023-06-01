@@ -34,6 +34,20 @@ async def assert_update(
         res_data = res.json()
         assert_dict_part(res_data, expected_data)
 
+async def assert_get_by_id(
+    uri: str,
+    client: AsyncClient,
+    id: str,
+    expected_status: int,
+    expected_data: dict[str, Any] | None,
+):
+    res = await client.get(f"{uri}/{id}")
+    assert res.status_code == expected_status
+
+    if expected_status == status.HTTP_200_OK:
+        res_data = res.json()
+        assert_dict_part(res_data, expected_data)
+
 async def assert_get_paged_list(
     uri: str,
     client: AsyncClient,
